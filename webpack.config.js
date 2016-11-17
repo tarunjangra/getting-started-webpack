@@ -1,8 +1,16 @@
+var webpack = require('webpack');
+var path = require('path');
+var CommonsChunkPlugin = require('./node_modules/webpack/lib/optimize/CommonsChunkPlugin');
+
 module.exports = {
-  entry: './src/main.js',
+  entry: {
+    about: './dist/aboutus',
+    contact: './dist/contact',
+    vendor: ['react','react-dom']
+  },
   output: {
-    path: 'build',
-    filename: './bundle.js'
+    path: path.join(__dirname, 'build'),
+    filename: '[name].bundle.js'
   },
   module: {
     loaders: [
@@ -13,7 +21,18 @@ module.exports = {
         query: {
           presets: ['es2015', 'react']
         }
+      },
+      {
+        test: /\.scss$/,
+        loader: 'style-loader!css-loader!sass-loader'
+      },
+      {
+        test: /\.(jpg|png)$/,
+        loader: 'url-loader?limit=200000'
       }
     ]
-  }
+  },
+  plugins: [
+    new CommonsChunkPlugin('vendor', 'vendor.bundle.js')
+  ]
 }
