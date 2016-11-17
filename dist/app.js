@@ -2,10 +2,16 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 class App extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {title: "Webpack"}
+  }
   render() {
     return <div>
-      <h1>My Webpack app</h1>
-      <p>A cool app build with react, webpakc and magic</p>
+      <h1>My {this.state.title} app</h1>
+      <p>A extremely cool app by Tarun Jangra build with react, webpakc and magic.
+      So nice.</p>
     </div>
   }
 }
